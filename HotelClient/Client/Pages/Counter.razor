@@ -1,0 +1,37 @@
+﻿@page "/counter"
+@using System.Net.Http
+@inject HttpClient Http
+@using System.Net.Http.Json
+@using HotelClient.Client.Model
+@using RestSharp
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 100;
+    protected override async Task OnInitializedAsync()
+    {
+
+
+    }
+
+    private async Task IncrementCount()
+    {
+        
+
+        var sjd = Http.BaseAddress;
+        var response = await Http.GetAsync("api/v1/Hotel/GetCounter");
+
+        var content = response.Content;
+
+
+        currentCount++;
+    }
+
+}

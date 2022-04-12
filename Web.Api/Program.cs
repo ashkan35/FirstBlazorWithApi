@@ -22,7 +22,7 @@ using WebFramework.ServiceConfiguration;
 using WebFramework.Swagger;
 
 var builder= WebApplication.CreateBuilder(args);
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Host.UseSerilog(LoggingConfiguration.ConfigureLogger);
 
 var configuration = builder.Configuration;
@@ -50,6 +50,15 @@ builder.Services.AddApplicationServices().RegisterIdentityServices(identitySetti
     .AddPersistenceServices(configuration).AddWebFrameworkServices();
 
 builder.Services.AddAutoMapper(typeof(User),typeof(JwtService),typeof(UserController));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+        });
+});
+
 
 var app = builder.Build();
 
@@ -87,7 +96,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseEndpoints(endpoints =>
 {
