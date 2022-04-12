@@ -15,4 +15,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\Persistence\HotelRoom\" />
+    <Folder Include="Models\HotelRoom\" />
+    <Folder Include="Validators\" />
+  </ItemGroup>
 </Project>
