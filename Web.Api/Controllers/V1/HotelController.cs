@@ -15,7 +15,8 @@ namespace Web.Api.Controllers.V1
         [AllowAnonymous]
         public async Task<IActionResult> GetCounter()
         {
-            var counter = new Counter{Name = "Count", Value = 2232};
+            var vvv = new Random().Next();
+            var counter = new Counter{Name = "Count", Value = vvv};
             return Ok(counter);
         }
     }

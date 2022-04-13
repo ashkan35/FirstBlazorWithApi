@@ -26,12 +26,12 @@
         
 
         var sjd = Http.BaseAddress;
-        var response = await Http.GetAsync("api/v1/Hotel/GetCounter");
+        var response = await Http.GetFromJsonAsync<CounterModel>("api/v1/Hotel/GetCounter");
 
-        var content = response.Content;
+     
 
 
-        currentCount++;
+        currentCount=response.Data.Value;
     }
 
 }
